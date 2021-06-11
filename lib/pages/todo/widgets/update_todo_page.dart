@@ -91,19 +91,3 @@ class UpdateToDoPage extends StatelessWidget {
     );
   }
 }
-
-Widget _updateButton(BuildContext context, ToDo toDo) {
-  return ElevatedButton(
-    style: ButtonStyle(
-        backgroundColor:
-            MaterialStateProperty.all(Theme.of(context).accentColor)),
-    child: Container(
-        height: MediaQuery.of(context).size.height * .05,
-        alignment: Alignment.center,
-        child: Text(
-          'Atualizar Anotação',
-          style: TextStyle(color: Colors.black),
-        )),
-    onPressed: () => BlocProvider.of<ToDoBloc>(context).add(ToDoUpdate(toDo)),
-  );
-}
