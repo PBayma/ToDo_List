@@ -31,7 +31,6 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
       try {
         ToDo toDo = event.toDo;
         await ToDoDatabase.update(toDo);
-        print(toDo);
         yield ToDoLoadedState(toDo);
       } catch (e) {}
     }

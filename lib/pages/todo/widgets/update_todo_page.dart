@@ -40,35 +40,39 @@ class UpdateToDoPage extends StatelessWidget {
         bloc: BlocProvider.of<ToDoBloc>(context),
         builder: (BuildContext context, state) {
           if (state is ToDoLoadedState) {
-            return Column(
-              children: [
-                UpdateToDoForm(
-                    toDo: state.toDo, title: _title, description: _description),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.20,
-                ),
-                ButtonUpdateToDo(
-                  toDo: state.toDo,
-                  title: _title,
-                  description: _description,
-                )
-              ],
+            return Container(
+              height: MediaQuery.of(context).size.height * 0.88,
+              child: Column(
+                children: [
+                  UpdateToDoForm(
+                      toDo: state.toDo,
+                      title: _title,
+                      description: _description),
+                  Spacer(),
+                  ButtonUpdateToDo(
+                    toDo: state.toDo,
+                    title: _title,
+                    description: _description,
+                  )
+                ],
+              ),
             );
           }
           if (state is ToDoInitialState) {
-            return Column(
-              children: [
-                UpdateToDoForm(
-                    toDo: toDo, title: _title, description: _description),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.20,
-                ),
-                ButtonUpdateToDo(
-                  toDo: toDo,
-                  title: _title,
-                  description: _description,
-                )
-              ],
+            return Container(
+              height: MediaQuery.of(context).size.height * 0.88,
+              child: Column(
+                children: [
+                  UpdateToDoForm(
+                      toDo: toDo, title: _title, description: _description),
+                  Spacer(),
+                  ButtonUpdateToDo(
+                    toDo: toDo,
+                    title: _title,
+                    description: _description,
+                  )
+                ],
+              ),
             );
           }
           return Column(
