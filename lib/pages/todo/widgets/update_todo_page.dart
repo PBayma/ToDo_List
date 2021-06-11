@@ -49,8 +49,8 @@ class UpdateToDoPage extends StatelessWidget {
                 ),
                 ButtonUpdateToDo(
                   toDo: state.toDo,
-                  title: _title.text,
-                  description: _description.text,
+                  title: _title,
+                  description: _description,
                 )
               ],
             );
@@ -65,8 +65,8 @@ class UpdateToDoPage extends StatelessWidget {
                 ),
                 ButtonUpdateToDo(
                   toDo: toDo,
-                  title: _title.text,
-                  description: _description.text,
+                  title: _title,
+                  description: _description,
                 )
               ],
             );

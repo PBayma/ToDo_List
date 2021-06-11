@@ -6,8 +6,9 @@ import 'package:teste_sqlite/pages/todo/bloc/todo_event.dart';
 
 class ButtonUpdateToDo extends StatelessWidget {
   final ToDo toDo;
-  final String title;
-  final String description;
+  final TextEditingController title;
+  final TextEditingController description;
+
   const ButtonUpdateToDo({
     Key? key,
     required this.toDo,
@@ -29,7 +30,8 @@ class ButtonUpdateToDo extends StatelessWidget {
               style: TextStyle(color: Colors.black),
             )),
         onPressed: () {
-          ToDo updatedToDo = ToDo(toDo.id, title, description, toDo.isDone);
+          ToDo updatedToDo =
+              ToDo(toDo.id, title.text, description.text, toDo.isDone);
 
           BlocProvider.of<ToDoBloc>(context).add(ToDoUpdate(updatedToDo));
 
