@@ -24,7 +24,9 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
         String id = uuid.v4();
         final ToDo toDo = ToDo(id, event.title, event.description, false);
         await ToDoDatabase.create(toDo);
-      } catch (e) {}
+      } catch (e) {
+        yield ToDoErrorState('Não foi possível criar a anotação');
+      }
     }
     if (event is ToDoUpdate) {
       yield ToDoLoadingtate();
@@ -33,7 +35,9 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
         await ToDoDatabase.update(toDo);
         print(toDo);
         yield ToDoLoadedState(toDo);
-      } catch (e) {}
+      } catch (e) {
+        yield ToDoErrorState('Não foi possível atualizar a anotação');
+      }
     }
     if (event is ToDoChangeIsDone) {
       yield ToDoLoadingtate();
@@ -41,21 +45,24 @@ class ToDoBloc extends Bloc<ToDoEvent, ToDoState> {
         ToDo toDo = event.toDo;
         toDo.isDone = !toDo.isDone;
         yield ToDoLoadedState(toDo);
-      } catch (e) {}
+      } catch (e) {
+        yield ToDoErrorState(
+            'Não foi possível mudar se a anotação foi conclída ou ainda está pendente');
+      }
     }
     if (event is ToDoDelete) {
       yield ToDoLoadingtate();
       try {
         await ToDoDatabase.delete(event.id);
         yield* _fetchToDos();
-      } catch (e) {}
+      } catch (e) {
+        yield ToDoErrorState('Não foi possível deletar essa anotação');
+      }
     }
   }
 
   Stream<ToDoState> _fetchToDos() async* {
-    try {
-      final List<ToDo> toDoList = await ToDoDatabase.getAll();
-      yield ToDosLoadedState(toDoList);
-    } catch (e) {}
+    final List<ToDo> toDoList = await ToDoDatabase.getAll();
+    yield ToDosLoadedState(toDoList);
   }
 }
